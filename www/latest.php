@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/common.php';
+require_once 'inc/infversion.php';
 require_once 'config.php';
 require_once 'inc/db.php';
 
@@ -22,14 +23,14 @@ if ( !$b )
 }
 
 
-$version = isset( $_GET['v'] ) ? $_GET['v'] : 'full';
+$versionname = isset( $_GET['v'] ) ? $_GET['v'] : 'full';
 
-$flag = InfCommon::getVersionFromName( $version );
-if ( $flag == INF_VER_NONE )
-	$flag = INF_VER_FULL;
+$ver = InfVersion::getVersionFromName( $versionname );
+if ( !$ver )
+	$ver = InfVersion::getFullVersion();
 
 
-$file = 'dl/'.InfCommon::formatFileName( $b['buildnum'], $flag );
+$file = 'dl/'.$ver->formatFileName( $b['buildnum'] );
 
 
 if ( !file_exists( $file ) )

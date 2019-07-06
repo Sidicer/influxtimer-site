@@ -1,5 +1,6 @@
 <?php
 require_once '../inc/common.php';
+require_once 'inc/infversion.php';
 require_once '../config.php';
 require_once '../inc/db.php';
 
@@ -96,40 +97,73 @@ $verflags = 0;
 
 
 // Open up the tar and extract the zips.
-$tar_success = true;
+$tar = null;
 
 try
 {
 	$tar = new PharData( $file['tmp_name'] );
-
-	if ( $tar->extractTo( INF_TEMP_DIR, 'full.zip' ) )
-	{
-		$verflags |= INF_VER_FULL;
-	}
-	if ( $tar->extractTo( INF_TEMP_DIR, 'bhop.zip' ) )
-	{
-		$verflags |= INF_VER_BHOP;
-	}
-	if ( $tar->extractTo( INF_TEMP_DIR, 'surf.zip' ) )
-	{
-		$verflags |= INF_VER_SURF;
-	}
-	if ( $tar->extractTo( INF_TEMP_DIR, 'bhoplite.zip' ) )
-	{
-		$verflags |= INF_VER_BHOPLITE;
-	}
 }
-catch ( PharException $e )
+catch ( Exception $e )
 {
-	InfCommon::log( 'Failed to extract tar!' );
-	$tar_success = false;
-}
-
-
-if ( !$tar_success )
-{
+	InfCommon::log( 'Failed to open tar!' );
 	return;
 }
+
+
+foreach ( $INF_BUILDVERSIONS as &$version )
+{
+	$deployfilename = $version->getDeployFileName();
+
+	$success = false;
+	try
+	{
+		$success = $tar->extractTo( INF_TEMP_DIR, $deployfilename );
+	}
+	catch ( Exception $e )
+	{
+		InfCommon::log( "Deployment tar didn't have {$deployfilename} in it..." );
+	}
+
+
+	if ( !$success )
+	{
+		continue;
+	}
+
+
+	$input = INF_TEMP_DIR.'/'.$deployfilename;
+	$output = $publicdir.'/'.$version->formatFileName( $buildnum );
+
+
+	if ( !file_exists( $input ) )
+	{
+		InfCommon::log( "File '{$input}' doesn't exist anymore! Wut?" );
+		continue;
+	}
+
+	if ( file_exists( $output ) )
+	{
+		InfCommon::log( "File '{$output}' already existed! Deleting..." );
+		unlink( $output );
+	}
+
+	if ( !rename( $input, $output ) )
+	{
+		$success = false;
+	}
+
+	if ( $success )
+	{
+		$verflags |= $version->bitflag;
+	}
+	else
+	{
+		unlink( $input );
+	}
+}
+
+
+unset( $tar );
 
 
 if ( !$verflags )
@@ -137,43 +171,6 @@ if ( !$verflags )
 	InfCommon::log( 'Failed to extract any files!' );
 	return;
 }
-
-
-
-function MoveUpload( &$flags, $f, $buildnum, $outputdir, $inputfile )
-{
-	$success = true;
-
-	if ( $flags & $f )
-	{
-		$output = $outputdir.'/'.InfCommon::formatFileName( $buildnum, $f );
-
-		if ( file_exists( $output ) )
-		{
-			unlink( $output );
-		}
-
-		if ( !rename( $inputfile, $output ) )
-		{
-			$success = false;
-		}
-	}
-	else
-	{
-		$success = false;
-	}
-
-	if ( !$success )
-	{
-		$flags = $flags & (~$f);
-	}
-}
-
-// Move the zips to public directory for download.
-MoveUpload( $verflags, INF_VER_FULL, $buildnum, $publicdir, INF_TEMP_DIR.'/full.zip' );
-MoveUpload( $verflags, INF_VER_BHOP, $buildnum, $publicdir, INF_TEMP_DIR.'/bhop.zip' );
-MoveUpload( $verflags, INF_VER_SURF, $buildnum, $publicdir, INF_TEMP_DIR.'/surf.zip' );
-MoveUpload( $verflags, INF_VER_BHOPLITE, $buildnum, $publicdir, INF_TEMP_DIR.'/bhoplite.zip' );
 
 
 // Save to db
@@ -185,16 +182,8 @@ $inf->saveBuild( $buildnum, $verflags, $branch, $commithash, $commitmsg );
 
 
 //
-// Remove old builds
+// Remove old dev builds
 //
-function RemoveFile( $file )
-{
-	if ( file_exists( $file ) )
-	{
-		unlink( $file );
-	}
-}
-
 $num_builds_keep = 8;
 
 $oldbuilds = $inf->getOldBuilds( $buildnum, 'dev', $num_builds_keep );
@@ -202,11 +191,17 @@ if ( $oldbuilds )
 {
 	foreach ( $oldbuilds as &$b )
 	{
-		RemoveFile( 'dl/' . InfCommon::formatFileName( $b['buildnum'], INF_VER_FULL ) );
-		RemoveFile( 'dl/' . InfCommon::formatFileName( $b['buildnum'], INF_VER_BHOP ) );
-		RemoveFile( 'dl/' . InfCommon::formatFileName( $b['buildnum'], INF_VER_SURF ) );
-		RemoveFile( 'dl/' . InfCommon::formatFileName( $b['buildnum'], INF_VER_BHOPLITE ) );
+		foreach ( $INF_BUILDVERSIONS as &$version )
+		{
+			$filename = '../dl/'.$version->formatFileName( $b['buildnum'] );
+
+			if ( file_exists( $filename ) )
+			{
+				unlink( $filename );
+			}
+		}
 	}
+
 	$inf->removeOlderBuilds( $buildnum - $num_builds_keep, 'dev' );
 }
 

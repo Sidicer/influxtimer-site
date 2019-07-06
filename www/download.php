@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/common.php';
+require_once 'inc/infversion.php';
 require_once 'config.php';
 require_once 'inc/db.php';
 
@@ -65,12 +66,15 @@ if ( $b )
 {
 	$date = new DateTime( $b['builddate'] );
 	echo $date->format( 'Y-m-d' ).'<br>';
-	
+
 	$added = false;
-	InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_FULL, $added );
-	InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_BHOP, $added );
-	InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_SURF, $added );
-	InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_BHOPLITE, $added );
+	foreach ( $INF_BUILDVERSIONS as &$version )
+	{
+		if ( $version->bitflag & $b['verflags'] )
+		{
+			$version->printVersionLink( $b['buildnum'], $added );
+		}
+	}
 }
 else
 {
@@ -114,10 +118,13 @@ if ( $builds )
 		
 		// Download links
 		$added = false;
-		InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_FULL, $added );
-		InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_BHOP, $added );
-		InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_SURF, $added );
-		InfCommon::printVersionLink( $b['buildnum'], $b['verflags'], INF_VER_BHOPLITE, $added );
+		foreach ( $INF_BUILDVERSIONS as &$version )
+		{
+			if ( $version->bitflag & $b['verflags'] )
+			{
+				$version->printVersionLink( $b['buildnum'], $added );
+			}
+		}
 		
 		echo '</td>';
 		echo '</tr>';
