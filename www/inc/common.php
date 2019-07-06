@@ -10,6 +10,7 @@ class InfCommon
 	static function log( $msg )
 	{
 		if ( !$msg ) return;
+		if ( !defined( 'INF_LOG_DIR' ) ) return;
 
 		$fp = @fopen( INF_LOG_DIR.'/'.INF_LOG_FILE, 'a+' );
 
