@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Influx Timer - Guide</title>
+<link rel="shortcut icon" type="image/png" href="img/icon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="styles/main.css">
+<link rel="stylesheet" type="text/css" href="styles/guide.css">
+<script src="js/randbg.js"></script>
+<meta name="description" content="Influx Timer, a SourceMod timer plugin for CSS and CS:GO game servers."/>
+<meta name="keywords" content="influx, timer, plugin, sourcemod, counter-strike, source, global offensive, cs, sm, css, bhop, surf, server, gameserver, game, cs:go, csgo, addon, addons, package, scripting, plugins, script, sourcepawn, pawn, sp, download, dl"/>
+<meta name="author" content="Miikka Ylätalo"/>
+</head>
+<body>
+<div class="container">
+	<div id="header-imgs">
+		<a href="."><img id="header-logo" class="header-logo" src="img/influx_logo.png" alt="Influx"/></a>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light inf-navbar">
+		<ul class="navbar-nav text-uppercase">
+			<li class="nav-item">
+				<a class="nav-link inf-main-nav" href="download">Download</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link inf-main-nav" href="steam://connect/96.249.254.250:27016">Try it</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link inf-main-nav active" href="guide.html">Guide</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link inf-main-nav" target="_blank" href="https://discord.gg/Mc5VDQT">Discord</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link inf-main-nav" href="index.html#donate">Donate</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="inf-cont">
+		<ul>
+			<li>
+				Installation
+				<ol>
+					<li><a href="#setup">Setup</a></li>
+					<li><a href="#usingmysql">Using MySQL</a></li>
+				</ol>
+			</li>
+			<li>
+				General
+				<ol>
+					<li><a href="#pluginlist">Plugin List</a></li>
+					<li>
+						<a href="#commands">Commands</a>
+						<ul>
+							<li><a href="#adminoverrides">Admin Overrides</a></li>
+						</ul>
+					</li>
+					<li><a href="#configs">Configs</a></li>
+					<li><a href="#zones">Zones</a></li>
+				</ol>
+			</li>
+			<li>
+				Common Problems
+				<ol>
+					<li><a href="#nothingworks">Nothing seems to work! / Influx is not loading!</a></li>
+					<li><a href="#bonuszones">How do I make bonus zones?</a></li>
+					<li>
+						<a href="#commonprespeed">Something is wrong with prespeeding / start zone!</a>
+						<ul>
+							<li><a href="#startprespeed">The zone bounds are weird / I have to jump early/late to prespeed!</a></li>
+							<li><a href="#prespeedsettings">How do I change prespeed settings?</a></li>
+						</ul>
+					</li>
+					<li><a href="#restartmain">I type !restart but it doesn't send me to the main run!</a></li>
+					<li><a href="#starttimer">Something doesn't allow me to start the timer!</a></li>
+					<li><a href="#airaccel">Changing sv_airaccelerate doesn't do anything!</a></li>
+					<li><a href="#influxhelp">I need help!</a></li>
+					<li><a href="#timersucks">This timer is terrible!</a></li>
+				</ol>
+			</li>
+		</ul>
+	</div>
+	<div class="inf-cont">
+		<div class="inf-faq-section">
+			<p class="display-4">Installation</p>
+
+			<div class="inf-faq-cont">
+				<a name="setup"></a>
+				<h4>Setup</h4>
+				<div class="inf-faq-cont-txt">
+					<ol>
+						<li>Install <a target="_blank" href="https://www.sourcemod.net/">SourceMod</a> and <a target="_blank" href="https://www.sourcemm.net/">MetaMod Source</a></li>
+						<li><a target="_blank" href="download">Download Influx</a> and extract the zip contents in cstrike/csgo-directory.</li>
+					</ol>
+					<p>Your directory structure should look like this:</p>
+					<pre>
+csgo/cstrike \
+              |addons \
+              |        |metamod
+              |        |sourcemod \
+              |                    |bin
+              |                    |configs
+              |                    |data
+              |                    |extentions
+              |                    |gamedata
+              |                    |...
+              |bin
+              |cfg \
+              |     |influx
+              |     |...
+              |...
+</pre>
+					<p>If you have problems, please see <a href="#nothingworks">this section</a>.</p>
+				</div>
+			</div>
+			
+			
+			<div class="inf-faq-cont">
+				<a name="usingmysql"></a>
+				<h4>Using MySQL</h4>
+				<div class="inf-faq-cont-txt">
+					<p><b>MySQL is OPTIONAL! SQLite is used by default and does not need any configuration!</b></p>
+					<p>In <mark>addons/sourcemod/configs/databases.cfg</mark>-file add <mark>influx-mysql</mark> section.</p>
+					<pre class="mx-auto" style="max-width: 100%">"influx-mysql"
+{
+	"driver"	"mysql"
+	"host"		"ipaddress"
+	"database"	"dbnameyoucreated"
+	"user"		"root"
+	"pass"		""
+	"port"		"3306"
+}</pre>
+					<p>Core plugin not loading and throwing errors might mean you've done this part wrong.</p>
+				</div>
+			</div>
+		</div>
+		<div class="inf-faq-section">
+			<p class="display-4">General</p>
+			<div class="inf-faq-cont">
+				<a name="pluginlist"></a>
+				<h4>Plugin List</h4>
+				<div class="inf-faq-cont-txt">
+					<h5>Core</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_core</th><th>This is the core of Influx. This is always required!</th></tr>
+							<tr><th>influx_help</th><th>Influx's <mark>!help</mark> menu.</th></tr>
+							<tr><th>influx_pause</th><th>Allows players to pause their run via <mark>!pause/!continue</mark>.</th></tr>
+							<tr><th>influx_practise</th><th>Allows players to enter practise mode.</th></tr>
+							<tr><th>influx_prespeed</th><th>Handles prespeed checks.</th></tr>
+							<tr><th>influx_recording</th><th>Run recording and playback via replay bot. <mark>!replay</mark></th></tr>
+							<tr><th>influx_recrank</th><th>Displays record message to players in chat.</th></tr>
+							<tr><th>influx_recsounds</th><th>Plays record sounds whenever player finishes a run. See <mark>addons/sourcemod/configs/influx_sounds.cfg</mark></th></tr>
+						</tbody>
+					</table>
+					<h5>Styles</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_style_adonly</th><th>A/D-Only (the user can choose between a-only or d-only)</th></tr>
+							<tr><th>influx_style_backwards</th><th>Backwards</th></tr>
+							<tr><th>influx_style_hsw</th><th>Half-Sideways (bhop hsw)</th></tr>
+							<tr><th>influx_style_lowgrav</th><th>Low Gravity</th></tr>
+							<tr><th>influx_style_normal</th><th>Normal</th></tr>
+							<tr><th>influx_style_parkour</th><th>Parkour</th></tr>
+							<tr><th>influx_style_prespeed</th><th>Prespeed (no prespeed limit)</th></tr>
+							<tr><th>influx_style_rhsw</th><th>Real Half-Sideways (surf hsw)</th></tr>
+							<tr><th>influx_style_sw</th><th>Sideways</th></tr>
+							<tr><th>influx_style_tas_csgo</th><th>TAS (CS:GO)</th></tr>
+							<tr><th>influx_style_tas_css</th><th>TAS (CSS)</th></tr>
+							<tr><th>influx_style_wonly</th><th>W-Only</th></tr>
+						</tbody>
+					</table>
+					<h5>Modes</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_mode_auto_csgo</th><th>Autobhop (CS:GO)</th></tr>
+							<tr><th>influx_mode_auto_css</th><th>Autobhop (CSS)</th></tr>
+							<tr><th>influx_mode_scroll</th><th>Scroll (ie. Legit)</th></tr>
+							<tr><th>influx_mode_stockcap</th><th>Stockcap (<mark>sv_enablebunnyhopping 0</mark> + scroll)</th></tr>
+							<tr><th>influx_mode_velcap</th><th>Velcap (ie. 400vel)</th></tr>
+						</tbody>
+					</table>
+					<h5>Stats</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_jumps</th><th>The jump stat. Adds counter to HUD and saves number of jumps to database.</th></tr>
+							<tr><th>influx_strafes</th><th>The strafe stat. Adds counter to HUD and saves number of strafes to database.</th></tr>
+							<tr><th>influx_strfsync</th><th>Strafe sync. Adds sync counter to HUD.</th></tr>
+							<tr><th>influx_maprankings</th><th>Map specific ranks. Adds rank to HUD.</th></tr>
+							<tr><th>influx_mvpstar</th><th>MVP star on the scoreboard signifies some stat. (by default the player's rank)</th></tr>
+							<tr><th>influx_printcptimes</th><th>Prints times in chat whenever player hits a checkpoint.</th></tr>
+							<tr><th>influx_simpleranks</th><th>Simple ranks. Players gain points and ranks for finishing runs.</th></tr>
+							<tr><th>influx_simpleranks_chat</th><th>Displays player's rank in their chat messages.</th></tr>
+						</tbody>
+					</table>
+					<h5>HUD</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_hud_draw</th><th>Core of hud drawing.</th></tr>
+							<tr><th>influx_hud_draw_csgo</th><th>Draws HUD for CS:GO (sidebar + center text)</th></tr>
+							<tr><th>influx_hud_draw_css</th><th>Draws HUD for CSS (sidebar + center text)</th></tr>
+							<tr><th>influx_truevel</th><th>Allows players to toggle between XY and XYZ speedometer in HUD.</th></tr>
+						</tbody>
+					</table>
+					<h5>Player settings</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_hud</th><th>Core of hud settings.</th></tr>
+							<tr><th>influx_hud_hidehud</th><th>Allows players to hide base HUD elements.</th></tr>
+							<tr><th>influx_hud_hideplayers</th><th>Allows players to hide other players.</th></tr>
+							<tr><th>influx_hud_hideplayers_wepsnd</th><th>Also turns off all weapons sounds.</th></tr>
+							<tr><th>influx_hud_recchat</th><th>Allows players to hide record messages.</th></tr>
+							<tr><th>influx_hud_recsounds</th><th>Allows players to stop record sounds.</th></tr>
+							<tr><th>influx_hud_viewmodel</th><th>Allows players to hide their viewmodel.</th></tr>
+						</tbody>
+					</table>
+					<h5>Misc</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_comp_standup</th><th>Compatibility to Standup lj plugin.</th></tr>
+							<tr><th>influx_config</th><th>Executes cfg/influx.cfg on every map change. (after <mark>gamemode_*.cfg</mark>)</th></tr>
+							<tr><th>influx_disableradio</th><th>Disable radio messages.</th></tr>
+							<tr><th>influx_disablesuicide</th><th>Disable suicide.</th></tr>
+							<tr><th>influx_dropknife_css</th><th>Allows players to drop their knife. For CS:GO use cvar.</th></tr>
+							<tr><th>influx_fixtimelimit</th><th>Fixes map changes done via <mark>mp_timelimit</mark>.</th></tr>
+							<tr><th>influx_nocollision</th><th>Turns off collisions between players.</th></tr>
+							<tr><th>influx_nodmg</th><th>Gives players god-mode.</th></tr>
+							<tr><th>influx_silent_chatcmds</th><th>Silences certain chat commands (by default: <mark>!r/!spec</mark>)</th></tr>
+							<tr><th>influx_specalltalk_css</th><th>Allows players to chat across teams (CSS).</th></tr>
+							<tr><th>influx_speclist</th><th>Displays spectator info with <mark>!speclist</mark>.</th></tr>
+							<tr><th>influx_teams</th><th>Allows players to change their team with <mark>!spawn/!spec</mark></th></tr>
+							<tr><th>influx_teams_autojoin</th><th>Forces players to autojoin a team.</th></tr>
+							<tr><th>influx_teletoend</th><th>Allows players to teleport to the end of the run via <mark>!end</mark>.</th></tr>
+							<tr><th>influx_teletorun</th><th>Allows players to teleport to a run via <mark>!main/!b/!b2</mark>.</th></tr>
+						</tbody>
+					</table>
+					<h5>Anti-cheat</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_ac_leftright</th><th>Blocks excessive +left/+right usage. Not recommended for surf.</th></tr>
+							<tr><th>influx_fpscheck</th><th>Checks player's fps_max (scroll)</th></tr>
+						</tbody>
+					</table>
+					<h5>Weapons</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_wepdrop</th><th>Removes all dropped weapons.</th></tr>
+							<tr><th>influx_wepgive</th><th>Allows players to give themselves weapons via chat (!usp)</th></tr>
+						</tbody>
+					</table>
+					<h5>Zones</h5>
+					<table class="table table-striped mx-auto" style="max-width:99%">
+						<tbody>
+							<tr><th>influx_zones</th><th>Core of zones.</th></tr>
+							<tr><th>influx_zones_beams</th><th>Displaying of zones. ie. beams</th></tr>
+							<tr><th>influx_zones_autobhop</th><th>Autobhop zone.</th></tr>
+							<tr><th>influx_zones_block</th><th>Block zone.</th></tr>
+							<tr><th>influx_zones_checkpoint</th><th>Checkpoint zone.</th></tr>
+							<tr><th>influx_zones_freestyle</th><th>Freestyle zone.</th></tr>
+							<tr><th>influx_zones_stage</th><th>Stage zone.</th></tr>
+							<tr><th>influx_zones_teleport</th><th>Teleport zone.</th></tr>
+							<tr><th>influx_zones_timer</th><th>Timer zones (start/end).</th></tr>
+							<tr><th>influx_zones_validator</th><th>Validator zone</th></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="commands"></a>
+				<h4>Commands</h4>
+				<div class="inf-faq-cont-txt">
+					<ul>
+						<li>You can find commands with the <mark>!help</mark>-command. (displays a menu)</li>
+						<li>You can also find most admins commands in <mark>!admin -> Influx Commands</mark></li>
+						<li>By default all admin related commands require root flag (z). See section below on where to find these.</li>
+					</ul>
+					<div class="inf-faq-cont">
+						<a name="adminoverrides"></a>
+						<h5>Admin Overrides</h5>
+						<div class="inf-faq-cont-txt">
+							<p>
+								You can find related overridable commands in <mark>addons/sourcemod/configs/admin_overrides_influx_example.cfg</mark>.
+								<br>
+								Edit the <mark>admin_overrides.cfg</mark> with the commands you want to override.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="configs"></a>
+				<h4>Configs</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						You can see and edit all cvars in configs contained in <mark>cfg/influx</mark>-directory. The default values may vary depending on the version downloaded.
+					</p>
+					<p>Map needs to be changed for changes to take effect!</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="zones"></a>
+				<h4>Zones</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Edit zones with <mark>!zone</mark>-command. You need root flag (z) by default.
+						<br>
+						Remember to hit save!
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="inf-faq-section">
+			<p class="display-4">Common Problems</p>
+
+			<div class="inf-faq-cont">
+				<a name="nothingworks"></a>
+				<h4>Nothing seems to work! / Influx is not loading!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Run <mark>meta</mark> and <mark>sm plugins list</mark> through the <u>server console</u>. If the commands don't respond, it means your installation of MetaMod/SourceMod is not working. Try using a dev-version of MetaMod and SourceMod (this is especially encountered on CS:GO).
+					</p>
+					<p>
+						If the following commands work and Influx still doesn't seem to load, <mark>sm plugins list</mark> will display what plugin failed to load.
+						<br>
+						Remember to also check your error log in <mark>addons/sourcemod/logs</mark>.
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="bonuszones"></a>
+				<h4>How do I make bonus zones?</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Just like the main run, you make them using Timer Start and Timer End zones. <mark>After the main run is created</mark>, a <mark>sub-menu will open</mark> when attemping to create one of these zones.
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="commonprespeed"></a>
+				<h4>Something is wrong with prespeeding / start zone!</h4>
+				<div class="inf-faq-cont-txt">
+					<a name="startprespeed"></a>
+					<h5>The zone bounds are weird / I have to jump early/late to prespeed!</h5>
+					<p>
+						The zone is like a normal map trigger. You need to leave it entirely to trigger it. You can edit the beams to display like you're used to by going into <mark>addons/sourcemod/configs/influx_beams.cfg</mark> and adding <mark>"offset" "-16"</mark>
+					</p>
+				</div>
+				<a name="prespeedsettings"></a>
+				<div class="inf-faq-cont-txt">
+					<h5>How do I change prespeed settings?</h5>
+					<p>
+						You can go to <mark>cfg/influx/prespeed.cfg</mark> for further customization.
+						<br>
+						Use the command <mark>!prespeedsettings</mark> to change settings per run.
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="restartmain"></a>
+				<h4>I type !restart but it doesn't send me to the main run!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						You can use <mark>!runs</mark> or <mark>!main</mark> to change your run. <mark>!restart</mark> will only reset you to the run you are currently in. You can change the behavior by using <mark>influx_teletorun_restarttocurrent 0</mark>
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="starttimer"></a>
+				<h4>Something doesn't allow me to start the timer!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Make sure you have a <b>mode</b> and a <b>style</b> plugin loaded even if you do not care for custom modes/styles (use <mark>influx_mode_scroll</mark> and <mark>influx_style_normal</mark> for defaults).
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="airaccel"></a>
+				<h4>Changing sv_airaccelerate doesn't do anything!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Sv_airaccelerate-cvar is controlled by modes. This is what allows multiple modes (eg. autobhop and scroll) to be played on the same server. You can change the mode's air acceleration in <mark>cfg/influx/mode_*.cfg</mark> files.
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont">
+				<a name="influxhelp"></a>
+				<h4>I need help!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						Please visit the <a target="_blank" href="https://discord.gg/Mc5VDQT">Influx Timer-discord</a> for help. Best way to receive help, is to use the <mark>help-channel</mark>, ask the question in <mark>proper English</mark> and <mark>ping me</mark>. I do not wish to be added / DM'd regarding the timer. I hope you understand.
+					</p>
+				</div>
+			</div>
+			<div class="inf-faq-cont-last">
+				<a name="timersucks"></a>
+				<h4>This timer is terrible!</h4>
+				<div class="inf-faq-cont-txt">
+					<p>
+						I'm sorry you feel that way. The timer is not in active development, but I do take <a target="_blank" href="https://github.com/InfluxTimer/sm-timer">pull requests</a> if you feel like the timer is missing some crucial feature.
+						<br>
+						There are also other timers out there that may fit your needs better, which you can <a target="_blank" href="https://forums.alliedmods.net/forumdisplay.php?f=108">find here</a> using the search-function.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

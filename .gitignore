@@ -1,0 +1,4 @@
+config.php
+influx_log.txt
+*.zip
+*.tar

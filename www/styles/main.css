@@ -1,0 +1,121 @@
+body {
+	margin: 0;
+	background-color: #e5e5ea;
+}
+
+mark {
+	background-color: #e1ffef;
+}
+
+.inf-cont a {
+	color:  #008a39;
+	transition: 0.2s;
+}
+
+.inf-cont a:link,a:active {
+	color:  #008a39;
+}
+
+.inf-cont a:hover {
+	color: #00a846;
+}
+
+.inf-cont a:visited {
+	color: #005724;
+}
+
+.navbar-nav {
+    float: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
+
+.container {
+	background-color: #ffffff;
+	padding-bottom: 100px;
+}
+
+.modal {
+	top: 100px;
+	padding-top: 100px;
+}
+
+.inf-cont {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.inf-main-nav {
+	min-width: 100px;
+	transition: 0.3s;
+}
+
+.inf-navbar {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+.inf-img-invert {
+	filter: invert(100%);
+}
+
+.inf-bg-myclr {
+	background-color: #7ce5a8;
+}
+
+.inf-card-text {
+	height: 100%;
+	padding-bottom: 15px;
+}
+
+.inf-card-title {
+	padding: 15px;
+}
+
+#header-imgs {
+	margin-left: -15px;
+	margin-right: -15px;
+	position: relative;
+	background-image: url('../img/bg001.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% cover;
+	background-attachment: fixed;
+	background-position: top center;
+	min-height: 300px;
+}
+
+#header-logo {
+	position:absolute;
+	margin:auto;
+	max-width:100%;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+.inf-enlarge {
+	width:200px;
+}
+
+.inf-modal {
+	transition: 0.3s;
+}
+
+.inf-modal:hover {
+	opacity: 0.7;
+}
+
+.inf-wordspace-10 {
+	word-spacing: 10px;
+}
+
+.inf-wordspace-3 {
+	word-spacing: 3px;
+}

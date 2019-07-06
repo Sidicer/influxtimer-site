@@ -1,0 +1,38 @@
+<?php
+if ( !defined( '_INF' ) ) exit( 'Nice try, buddy.' );
+
+
+
+//
+// Configure these.
+//
+define( 'INF_DB_HOST', '' );
+define( 'INF_DB_NAME', '' );
+define( 'INF_DB_PORT', '' );
+define( 'INF_DB_USER', '' );
+define( 'INF_DB_PASS', '' );
+
+define ( 'INF_SQL_PERSISTENT', false );
+
+
+define( 'INF_DEPLOY_FILENAME', 'deploy.php' );
+define( 'INF_DEPLOY_KEY', '' );
+define( 'INF_DEPLOY_KEY_SITE', '' );
+
+define( 'INF_LOG_DIR', '' );
+define( 'INF_TEMP_DIR', '' );
+
+
+define ( 'INF_DEBUG', false );
+//
+// End of configuration.
+//
+
+
+
+if ( INF_DEBUG )
+{
+	error_reporting( E_ALL );
+	ini_set( 'display_errors', 1 );
+}
+?>
