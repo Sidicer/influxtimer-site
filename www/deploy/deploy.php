@@ -100,6 +100,14 @@ if ( !file_exists( INF_TEMP_DIR ) && !mkdir( INF_TEMP_DIR ) )
 }
 
 
+$tarname = INF_TEMP_DIR.'/temp.tar';
+if ( !move_uploaded_file( $file['tmp_name'], $tarname ) )
+{
+	InfCommon::log( "Failed to move uploaded file to temporary folder!" );
+	return;
+}
+
+
 $verflags = 0;
 
 
@@ -108,11 +116,11 @@ $tar = null;
 
 try
 {
-	$tar = new PharData( $file['tmp_name'] );
+	$tar = new PharData( $tarname );
 }
 catch ( Exception $e )
 {
-	InfCommon::log( 'Failed to open tar!' );
+	InfCommon::log( 'Failed to open tar! Error: ' . $e->getMessage() );
 	return;
 }
 
@@ -171,6 +179,7 @@ foreach ( $INF_BUILDVERSIONS as &$version )
 
 
 unset( $tar );
+unlink( $tarname );
 
 
 if ( !$verflags )
