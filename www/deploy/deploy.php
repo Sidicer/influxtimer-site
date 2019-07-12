@@ -76,6 +76,13 @@ if ( !$file )
 }
 
 
+$error = $file['error'];
+if ( $error != UPLOAD_ERR_OK )
+{
+	InfCommon::log( "Upload failed with error {$error}..." );
+	return;
+}
+
 $filecount = count( $file['tmp_name'] );
 
 // We should only have one file, the tar.
