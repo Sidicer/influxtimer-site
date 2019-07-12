@@ -1,6 +1,6 @@
 <?php
 require_once '../inc/common.php';
-require_once 'inc/infversion.php';
+require_once '../inc/infversion.php';
 require_once '../config.php';
 require_once '../inc/db.php';
 
