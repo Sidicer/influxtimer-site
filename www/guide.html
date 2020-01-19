@@ -75,7 +75,14 @@
 							<li><a href="#prespeedsettings">How do I change prespeed settings?</a></li>
 						</ul>
 					</li>
-					<li><a href="#restartmain">I type !restart but it doesn't send me to the main run!</a></li>
+					<li>
+						<li><a href="#commonspawning">Common spawning issues</a></li>
+						<ul>
+							<li><a href="#whyroundend">Why doesn't the round end?</a></li>
+							<li><a href="#stoprespawning">How do I stop players from respawning?</a></li>
+							<li><a href="#restartmain">I type !restart but it doesn't send me to the main run!</a></li>
+						</ul>
+					</li>
 					<li><a href="#starttimer">Something doesn't allow me to start the timer!</a></li>
 					<li><a href="#airaccel">Changing sv_airaccelerate doesn't do anything!</a></li>
 					<li><a href="#influxhelp">I need help!</a></li>
@@ -360,12 +367,30 @@ csgo/cstrike \
 				</div>
 			</div>
 			<div class="inf-faq-cont">
-				<a name="restartmain"></a>
-				<h4>I type !restart but it doesn't send me to the main run!</h4>
+				<a name="commonspawning"></a>
+				<h4>Common spawning issues</h4>
 				<div class="inf-faq-cont-txt">
-					<p>
-						You can use <mark>!runs</mark> or <mark>!main</mark> to change your run. <mark>!restart</mark> will only reset you to the run you are currently in. You can change the behavior by using <mark>influx_teletorun_restarttocurrent 0</mark>
-					</p>
+					<a name="whyroundend"></a>
+					<div class="inf-faq-cont-txt">
+						<h5>Why doesn't the round end?</h4>
+						<p>
+							Go to <mark>cfg/influx.cfg</mark> and remove <mark>mp_ignore_round_win_conditions 1</mark>.
+						</p>
+					</div>
+					<a name="stoprespawning"></a>
+					<div class="inf-faq-cont-txt">
+						<h5>How do I stop players from respawning?</h4>
+						<p>
+							Remove plugins <mark>influx_teletorun</mark> and <mark>influx_teams</mark>. You may also want to change <mark>influx_teleonstylechange</mark> to 0 in <mark>cfg/influx/core.cfg</mark>.
+						</p>
+					</div>
+					<a name="restartmain"></a>
+					<div class="inf-faq-cont-txt">
+						<h5>I type !restart but it doesn't send me to the main run!</h4>
+						<p>
+							You can use <mark>!runs</mark> or <mark>!main</mark> to change your run. <mark>!restart</mark> will only reset you to the run you are currently in. You can change the behavior by using <mark>influx_teletorun_restarttocurrent 0</mark>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="inf-faq-cont">
