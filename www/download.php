@@ -80,17 +80,28 @@ else
 {
 	echo '<p class="text-center" style="word-spacing: 1px;">Go ahead and download one of the dev builds below :)</p>';
 }
+
+// Dev builds
+$builds = $inf->getLatestBuilds( 'dev' );
 ?>
 		</p>
 	</div>
 	<div class="inf-cont">
 		<p class="mx-auto text-center display-4">Dev</p>
+<?php
+// Latest dev build date
+if ( $builds )
+{
+	$date = new DateTime( $builds[0]['builddate'] );
+	echo '<p class="text-center">'.$date->format( 'Y-m-d' ).'</p>';
+}
+?>
 		<table class="table table-sm table-striped mx-auto" style="max-width:99%">
 			<thead class="inf-bg-myclr">
 				<tr>
 					<th>#</th>
-			  		<th>Msg</th>
-			  		<th></th>
+			  		<th>Commit Message</th>
+			  		<th>Package Download</th>
 				</tr>
 		  	</thead>
 		  	<tbody>
@@ -98,7 +109,6 @@ else
 //
 // Dev builds
 //
-$builds = $inf->getLatestBuilds( 'dev' );
 if ( $builds )
 {
 	foreach ( $builds as &$b )

@@ -85,7 +85,7 @@ class InfSiteDb
 	
 	public function getLatestBuilds( $branch, $limit = 5 )
 	{
-		$res = $this->pdo->prepare( 'SELECT buildnum,verflags,commithash,commitmsg FROM '.DB_TABLE_BUILDS." WHERE branch=:branch ORDER BY builddate DESC LIMIT :limit" );
+		$res = $this->pdo->prepare( 'SELECT buildnum,verflags,commithash,commitmsg,builddate FROM '.DB_TABLE_BUILDS." WHERE branch=:branch ORDER BY builddate DESC LIMIT :limit" );
 		
 		if ( !$res )
 		{
