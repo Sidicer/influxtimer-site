@@ -162,6 +162,7 @@ else
 				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=166468">Modify weapon speeds (260vel weapons)</a><br>
 				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=255298">CS:GO Movement Unlocker (prestrafing)</a><br>
 				<a target="_blank" href="https://github.com/Franc1sco/FixHintColorMessages">CS:GO HUD fix</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=320971">Surf Ramp Bug Fix</a><br>
 			</div>
 		</div>
 	</div>
