@@ -99,9 +99,9 @@ if ( $builds )
 		<table class="table table-sm table-striped mx-auto" style="max-width:99%">
 			<thead class="inf-bg-myclr">
 				<tr>
-					<th>#</th>
+					<th class="text-center">#</th>
 			  		<th>Commit Message</th>
-			  		<th>Package Download</th>
+					<th class="text-center">Package Download</th>
 				</tr>
 		  	</thead>
 		  	<tbody>
