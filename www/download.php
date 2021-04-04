@@ -40,7 +40,7 @@ if ( INF_DEBUG )
 				<a class="nav-link inf-main-nav active" href="#">Download</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link inf-main-nav" href="steam://connect/zmreborn-servers.xyz:27016">Try it</a>
+				<a class="nav-link inf-main-nav" href="steam://connect/servers.zmreborn.com:27016">Try it</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link inf-main-nav" href="guide.html">Guide</a>
