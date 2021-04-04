@@ -53,42 +53,13 @@ if ( INF_DEBUG )
 			</li>
 		</ul>
 	</nav>
+
 	<div class="inf-cont">
-		<p class="mx-auto text-center display-4">Stable</p>
-		<p class="text-center inf-wordspace-10">
+		<p class="mx-auto text-center display-4">Latest</p>
 <?php
-//
-// Stable build
-//
-$b = $inf->getLatestStableBuild();
-
-if ( $b )
-{
-	$date = new DateTime( $b['builddate'] );
-	echo $date->format( 'Y-m-d' ).'<br>';
-
-	$added = false;
-	foreach ( $INF_BUILDVERSIONS as &$version )
-	{
-		if ( $version->bitflag & $b['verflags'] )
-		{
-			$version->printVersionLink( $b['buildnum'], $added );
-		}
-	}
-}
-else
-{
-	echo '<p class="text-center" style="word-spacing: 1px;">Go ahead and download one of the dev builds below :)</p>';
-}
-
 // Dev builds
 $builds = $inf->getLatestBuilds( 'dev' );
-?>
-		</p>
-	</div>
-	<div class="inf-cont">
-		<p class="mx-auto text-center display-4">Dev</p>
-<?php
+
 // Latest dev build date
 if ( $builds )
 {
@@ -147,6 +118,36 @@ else
 ?>
 			</tbody>
 		</table>
+	</div>
+	<div class="inf-cont">
+		<p class="mx-auto text-center display-4">Old Build</p>
+		<p class="text-center inf-wordspace-10">
+<?php
+//
+// Stable build
+//
+$b = $inf->getLatestStableBuild();
+
+if ( $b )
+{
+	$date = new DateTime( $b['builddate'] );
+	echo $date->format( 'Y-m-d' ).'<br>';
+
+	$added = false;
+	foreach ( $INF_BUILDVERSIONS as &$version )
+	{
+		if ( $version->bitflag & $b['verflags'] )
+		{
+			$version->printVersionLink( $b['buildnum'], $added );
+		}
+	}
+}
+else
+{
+	echo '<p class="text-center" style="word-spacing: 1px;">Go ahead and download one of the dev builds below :)</p>';
+}
+?>
+		</p>
 	</div>
 	<div class="inf-cont">
 		<p class="font-weight-light text-muted">Lite is a special version targeted for LAN usage, which strips all unnecessary content.</p>
