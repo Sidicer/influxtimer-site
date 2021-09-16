@@ -5,11 +5,11 @@
 define( 'INF_VER_NONE', 0 );
 
 $INF_BUILDVERSIONS = array(
-	new InfVersion( 1, 'full', 'Full' ),
 	new InfVersion( 2, 'bhop', 'Bhop' ),
 	new InfVersion( 4, 'surf', 'Surf' ),
 	new InfVersion( 8, 'bhoplite', 'BhopLite' ),
-	new InfVersion( 16, 'deathrun', 'Deathrun' )
+	new InfVersion( 16, 'deathrun', 'Deathrun' ),
+	new InfVersion( 1, 'full', 'Full' )
 );
 
 

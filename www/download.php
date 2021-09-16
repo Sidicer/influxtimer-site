@@ -49,7 +49,7 @@ if ( INF_DEBUG )
 	</nav>
 
 	<div class="inf-cont">
-		<p class="mx-auto text-center display-4">Latest</p>
+		<p class="mx-auto text-center display-4">Latest Build</p>
 <?php
 // Dev builds
 $builds = $inf->getLatestBuilds( 'dev' );
@@ -112,6 +112,25 @@ else
 ?>
 			</tbody>
 		</table>
+		<div class="mx-auto text-center mt-4">
+			<p>Place the zip contents in your game directory (cstrike/csgo). Follow the <a href="guide.html">guide page</a> for further guidance.</p>
+			<p class="font-weight-light text-muted">Lite is a special version targeted for LAN servers. Features such as chat-tags and ranks are removed from this build.</p>
+			<p class="font-weight-light text-muted">Full package contains all plugins and features contained within Influx. It isn't configured for any particular gamemode.</p>
+		</div>
+	</div>
+	<div class="inf-cont">
+		<h3 class="mx-auto text-center font-weight-light">Other plugins you might like</h3>
+		<div style="display:flex; justify-content: center; align-items: center;">
+			<div style="display: inline-block;">
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=310825">RNGFix (Slope boost &amp; bhop booster fix)</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?p=2069582">Auto nav file generator</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?p=808724">MP Bhop blocks (func_door bhop blocks)</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=166468">Modify weapon speeds (260vel weapons)</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=255298">CS:GO Movement Unlocker (prestrafing)</a><br>
+				<a target="_blank" href="https://github.com/Franc1sco/FixHintColorMessages">CS:GO HUD fix</a><br>
+				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=320971">Surf Ramp Bug Fix</a><br>
+			</div>
+		</div>
 	</div>
 	<div class="inf-cont">
 		<p class="mx-auto text-center display-4">Old Build</p>
@@ -142,24 +161,6 @@ else
 }
 ?>
 		</p>
-	</div>
-	<div class="inf-cont">
-		<p class="font-weight-light text-muted">Lite is a special version targeted for LAN usage, which strips all unnecessary content.</p>
-		<p>Place the zip contents in your game directory (cstrike/csgo). Follow the <a href="guide.html">guide page</a> for further guidance.</p>
-	</div>
-	<div class="inf-cont">
-		<h3 class="mx-auto text-center font-weight-light">Other plugins you might like</h3>
-		<div style="display:flex; justify-content: center; align-items: center;">
-			<div style="display: inline-block;">
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=310825">RNGFix (Slope boost &amp; bhop booster fix)</a><br>
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?p=2069582">Auto nav file generator</a><br>
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?p=808724">MP Bhop blocks (func_door bhop blocks)</a><br>
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=166468">Modify weapon speeds (260vel weapons)</a><br>
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=255298">CS:GO Movement Unlocker (prestrafing)</a><br>
-				<a target="_blank" href="https://github.com/Franc1sco/FixHintColorMessages">CS:GO HUD fix</a><br>
-				<a target="_blank" href="https://forums.alliedmods.net/showthread.php?t=320971">Surf Ramp Bug Fix</a><br>
-			</div>
-		</div>
 	</div>
 </div>
 </body>
