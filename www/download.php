@@ -40,16 +40,10 @@ if ( INF_DEBUG )
 				<a class="nav-link inf-main-nav active" href="#">Download</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link inf-main-nav" href="steam://connect/servers.zmreborn.com:27016">Try it</a>
-			</li>
-			<li class="nav-item">
 				<a class="nav-link inf-main-nav" href="guide.html">Guide</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link inf-main-nav" target="_blank" href="https://discord.gg/Mc5VDQT">Discord</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link inf-main-nav" href="index.html#donate">Donate</a>
 			</li>
 		</ul>
 	</nav>
