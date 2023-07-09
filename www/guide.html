@@ -138,6 +138,35 @@ csgo/cstrike \
 					<p>Core plugin not loading and throwing errors might mean you've done this part wrong.</p>
 					<p>The latest supported MySQL version is 5.7.33. Newer versions like 8.x are incompatible due to an updated authentication schema.</p>
 				</div>
+				<div class="inf-faq-cont-txt">
+					<p><b>To convert your already running SQLite database to MySQL:</b></p>
+					<ol>
+						<li style="padding-top:5px;">Make sure you have <mark>sqlite3</mark> installed! <code>apt update;apt install sqlite3;sqlite3 --version;</code></li>
+						<li style="padding-top:5px;">Copy your current database from <mark>/addons/sourcemod/data/sqlite/influx-sqlite.sq3</mark></li>
+						<li style="padding-top:5px;">Create <mark>sqlite-mysql.sh</mark> bash file and <code>chmod +x sqlite-mysql.sh</code> (this file will dump sqlite3 database and convert it to MySQL <mark>.sql</mark> dump</li>
+						<li style="padding-top:5px;">Add this to the newly created file:
+<code>
+<pre style="margin-top:10px;">
+#!/bin/bash
+sqlite3 influx-sqlite.sq3 .dump > influx-dump.sqlite
+replace "BEGIN TRANSACTION" "START TRANSACTION" -- influx-dump.sqlite
+replace "uid INTEGER PRIMARY KEY" "uid INTEGER PRIMARY KEY AUTO_INCREMENT" -- influx-dump.sqlite
+replace "PRAGMA foreign_keys=OFF;" "SET NAMES utf8mb4;" -- influx-dump.sqlite
+replace "ON CONFLICT FAIL" "" -- influx-dump.sqlite
+replace "usage VARCHAR(64)" "\`usage\` VARCHAR(64)" -- influx-dump.sqlite
+replace "noauto VARCHAR(3)" "\`noauto\` VARCHAR(3)" -- influx-dump.sqlite
+replace "DEFAULT \`off\`" "DEFAULT 'off'" -- influx-dump.sqlite
+mv influx-dump.sqlite influx-database.sql
+mysql -u user -p database < influx-database.sql
+</pre>
+</code>
+						</li>
+						<li>Make sure to replace <code>user</code> and <code>database</code> in the last line to match the ones you've setup in <mark>/addons/sourcemod/configs/databases.cfg</mark></li>
+						<li>Now just run your script with <code>./sqlite-mysql.sh</code></li>
+						<li>It will dump sqlite3 database, replace some lines to match MySQL and then import the dump into your mysql database</li>
+						<li>It will ask you for the database password so be prepared to enter it (or you can replace <code>-p database</code> with <code>-pYourPasswordHere database</code>)</li>
+					</ol>
+				</div>
 			</div>
 		</div>
 		<div class="inf-faq-section">
