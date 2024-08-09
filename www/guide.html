@@ -136,7 +136,30 @@ csgo/cstrike \
 	"port"		"3306"
 }</pre>
 					<p>Core plugin not loading and throwing errors might mean you've done this part wrong.</p>
-					<p>The latest supported MySQL version is 5.7.33. Newer versions like 8.x are incompatible due to an updated authentication schema.</p>
+					<p>The latest officially supported MySQL version is <b>5.7.33</b>.</p>
+				</div>
+				<div class="inf-faq-cont-txt">
+					<p><b>If MySQL versions 8.0.0 - 8.4.0 are required:</b></p>
+					<ul>
+						<li style="padding-top:5px;"><mark>mysql-native-password</mark> needs to be enabled!</li>
+						<li style="padding-top:5px;">Either by updating <mark>/etc/my.cnf</mark> (or <mark>/etc/mysql/my.cnf</mark>)</li>
+<code>
+<pre style="margin-top:10px;">
+[mysqld]
+default-authentication-plugin=mysql_native_password
+</pre>
+</code>
+						<li>Or by changing the docker start command:</li>
+<code>
+<pre style="margin-top:10px;">
+services:
+  influx-database:
+    image: mysql:8.4.0
+    command: ["mysqld","--mysql-native-password=ON"]
+</pre>
+</code>
+						<li>[<b>WARNING</b>] This might get disabled in any upcoming MySQL versions!</li>
+					</ul>
 				</div>
 				<div class="inf-faq-cont-txt">
 					<p><b>To convert your already running SQLite database to MySQL:</b></p>
